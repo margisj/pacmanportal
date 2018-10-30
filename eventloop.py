@@ -1,10 +1,11 @@
 import pygame
 import sys
-from pacman import Pacman
+
 
 class EventLoop:
     def __init__(self, finished):
         self.finished = finished
+
     def __str__(self):
         return 'eventloop, finished=' + str(self.finished) + ')'
 

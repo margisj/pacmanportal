@@ -4,6 +4,7 @@ from eventloop import EventLoop
 from pacman import Pacman
 from ghost import Ghost
 
+
 class Game:
     Black = (0, 0, 0)
 
@@ -48,19 +49,19 @@ class Game:
     def update_screen(self):
         self.screen.fill(Game.Black)
         if not self.pacman.active:
-            self.prepStartScreen()
+            self.prepstartscreen()
         else:
             self.maze.blitme()
             self.pacman.blitme()
-            self.prepScore()
-            self.prepLives()
+            self.prepscore()
+            self.preplives()
             for ghost in self.ghost:
                 ghost.blitme()
 
         pygame.display.flip()
 
-    def prepScore(self):
-        self.score = self.pacman.getScore()
+    def prepscore(self):
+        self.score = self.pacman.getscore()
         score_str = '{:>3}'.format(self.score)
         self.score_image = self.font.render('Score: ' + score_str, True, (255, 255, 255), (0, 0, 0))
         self.score_rect = self.score_image.get_rect()
@@ -68,8 +69,8 @@ class Game:
         self.score_rect.top = self.screen_rect.bottom - 30
         self.screen.blit(self.score_image, self.score_rect)
 
-    def prepLives(self):
-        self.lives = self.pacman.getLives()
+    def preplives(self):
+        self.lives = self.pacman.getlives()
         lives_text = self.font.render('Lives: ', True, (255, 255, 255), (0, 0, 0))
         lives_text_rect = lives_text.get_rect()
         lives_text_rect.right = self.screen_rect.left + 500
@@ -81,20 +82,20 @@ class Game:
             self.live_rect.top = self.screen_rect.bottom - 35
             self.screen.blit(self.live_image, self.live_rect)
 
-    def prepStartScreen(self):
+    def prepstartscreen(self):
         titleimg = pygame.image.load('images/title.png')
         titleimg = pygame.transform.scale(titleimg, (570, 150))
         title_rect = titleimg.get_rect()
-        title_rect = (self.screen_rect.centerx - title_rect.width / 2, (self.screen_rect.centery - title_rect.height / 2) - 250)
+        title_rect = (self.screen_rect.centerx - title_rect.width / 2,
+                      (self.screen_rect.centery - title_rect.height / 2) - 250)
         self.screen.blit(titleimg, title_rect)
 
+        titlepac = Pacman(self.screen, self.maze)
+        titlepac.rect.x = 200
+        titlepac.rect.y = 450
+        titlepac.blitme()
 
-        titlePac = Pacman(self.screen, self.maze)
-        titlePac.rect.x = 200
-        titlePac.rect.y = 450
-        titlePac.blitme()
-
-        ghost = []
+        ghost = list()
         ghost.append(Ghost(self.screen, self.maze, 'redghost', 0))
         ghost.append(Ghost(self.screen, self.maze, 'cyanghost', 1))
         ghost.append(Ghost(self.screen, self.maze, 'pinkghost', 2))
@@ -119,10 +120,9 @@ class Game:
         self.scores_rect.y = self.screen_rect.centery - self.scores_rect.height/2 + 350
         self.screen.blit(scoresimg, self.scores_rect)
 
-    def displayScores(self):
-        scoresimg = pygame.image.load('images/scoreslist.png')
+    def displayscores(self):
         scoresimg = pygame.image.load('images/scores.png')
-        #scoresimg = pygame.transform.scale(scoresimg, (380, 100))
+        # scoresimg = pygame.transform.scale(scoresimg, (380, 100))
         scores_rect = scoresimg.get_rect()
         scores_rect.x = self.screen_rect.centerx - scores_rect.width / 2
         scores_rect.y = self.screen_rect.centery - scores_rect.height / 2

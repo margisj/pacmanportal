@@ -1,5 +1,6 @@
 import pygame
 
+
 class ImageRect:
     def __init__(self, screen, imagename, height, width):
         self.screen = screen

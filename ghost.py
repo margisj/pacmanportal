@@ -44,16 +44,16 @@ class Ghost(Sprite):
         self.animate()
         if self.moveLeft:
             self.rect.x -= self.speed
-            self.checkcoll()
+            self.checkcoll('left')
         elif self.moveRight:
             self.rect.x += self.speed
-            self.checkcoll()
+            self.checkcoll('right')
         elif self.moveUp:
             self.rect.y -= self.speed
-            self.checkcoll()
+            self.checkcoll('up')
         elif self.moveDown:
             self.rect.y += self.speed
-            self.checkcoll()
+            self.checkcoll('down')
 
     def stop(self):
         self.moveLeft = False
@@ -83,7 +83,7 @@ class Ghost(Sprite):
         self.rect.x = 280 + self.behavior*40
         self.rect.y = 350
 
-    def genPath(self):
+    def genpath(self):
         if self.behavior == 0:
             self.path = [(351, 130),
                          (702, 130),
@@ -97,7 +97,7 @@ class Ghost(Sprite):
                          (637, 676),
                          (546, 676),
                          (546, 546),
-                         (559, 130),]
+                         (559, 130), ]
 
     def animate(self):
             if pygame.time.get_ticks() > self.last + 200:

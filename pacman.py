@@ -49,9 +49,9 @@ class Pacman(Sprite):
         self.nextLevel = False
         self.active = False
 
-
         # Move to start position
         self.reset()
+
     def blitme(self):
         self.screen.blit(self.image, self.rect)
 
@@ -167,10 +167,10 @@ class Pacman(Sprite):
                 self.image = pygame.transform.rotate(self.image, self.angle)
                 self.last = pygame.time.get_ticks()
 
-    def getScore(self):
+    def getscore(self):
         return self.score
 
-    def getLives(self):
+    def getlives(self):
         return self.lives
 
     def die(self):

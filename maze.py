@@ -1,6 +1,5 @@
 import pygame
 from imagerect import ImageRect
-from pygame.sprite import Group
 
 
 class Maze:
@@ -23,8 +22,8 @@ class Maze:
         sz = Maze.BRICK_SIZE
         self.brick = ImageRect(screen, brickfile, sz, sz)
         self.shield = ImageRect(screen, shieldfile, sz, sz)
-        self.point = ImageRect(screen, pointfile, (int)(sz*0.75), (int)(sz*0.75))
-        self.pill = ImageRect(screen, pointfile, (int)(sz*1.25), (int)(sz*1.25))
+        self.point = ImageRect(screen, pointfile, int(sz*0.75), int(sz*0.75))
+        self.pill = ImageRect(screen, pointfile, int(sz*1.25), int(sz*1.25))
         self.hportal = ImageRect(screen, portalfile, sz, sz)
         self.vportal = self.hportal
         self.vportal.image = pygame.transform.rotate(self.vportal.image, 90)
@@ -59,7 +58,6 @@ class Maze:
                     self.pills.append(pygame.Rect(ncol * dx, nrow * dy, rpill.width, rpill.height))
                 elif col.isdigit():
                     print(col + row[ncol+1] + ' (', ncol*dx, ',', nrow*dy, '), \n')
-
 
     def blitme(self):
         for rect in self.bricks:
