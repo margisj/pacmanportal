@@ -34,6 +34,14 @@ class Game:
         self.start_rect = None
         self.scores_rect = None
 
+        self.titlepac = Pacman(self.screen, self.maze)
+        self.titleghost = list()
+        self.titleghost.append(Ghost(self.screen, self.maze, 'redghost', 0))
+        self.titleghost.append(Ghost(self.screen, self.maze, 'cyanghost', 1))
+        self.titleghost.append(Ghost(self.screen, self.maze, 'pinkghost', 2))
+        self.titleghost.append(Ghost(self.screen, self.maze, 'orangeghost', 3))
+
+
     def __str__(self): return 'Game(Pacman Portal), maze=' + str(self.maze) + ')'
 
     def play(self):
@@ -90,20 +98,16 @@ class Game:
                       (self.screen_rect.centery - title_rect.height / 2) - 250)
         self.screen.blit(titleimg, title_rect)
 
-        titlepac = Pacman(self.screen, self.maze)
-        titlepac.rect.x = 200
-        titlepac.rect.y = 450
-        titlepac.blitme()
+        self.titlepac.rect.x = 200
+        self.titlepac.rect.y = 450
+        self.titlepac.update()
+        self.titlepac.blitme()
 
-        ghost = list()
-        ghost.append(Ghost(self.screen, self.maze, 'redghost', 0))
-        ghost.append(Ghost(self.screen, self.maze, 'cyanghost', 1))
-        ghost.append(Ghost(self.screen, self.maze, 'pinkghost', 2))
-        ghost.append(Ghost(self.screen, self.maze, 'orangeghost', 3))
         for x in range(4):
-            ghost[x].rect.x = 250 + x*60
-            ghost[x].rect.y = 450
-            ghost[x].blitme()
+            self.titleghost[x].rect.x = 250 + x*60
+            self.titleghost[x].rect.y = 450
+            self.titleghost[x].update()
+            self.titleghost[x].blitme()
 
         # Play Button
         startimg = pygame.image.load('images/play.png')
